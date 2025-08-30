@@ -2,102 +2,43 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main>
+      {/* step5: created two sections of 100vh each here below. */}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* step6: lets make it grid now to get 2 columns. */}
+      <section className="bg-[#ffceee] min-h-[100vh] grid grid-cols-2">
+
+        {/* step7: now lets make the two div for the two columns of the grid now. */}
+
+        {/* step8: now lets make the two paragraphs in first div to be one below the other like a flex column ; and then since we had given right width to navbar of 10vw in Navbar.js ; here also lets make the div below have margin from left as 10vw and the div of 2nd column to have 10vw margin from right too ; so that it gets aligned with the navbar below it there. */}
+
+        {/* step10: remove ditems centre from below later tomake text to be left aligned there. */}
+        <div className="flex flex-col justify-center ml-[10vw]">
+
+          <p className="text-7xl font-extrabold text-[#54043f]">Your entire</p> 
+          <p className="text-7xl font-extrabold text-[#54043f]">online world, unified</p> 
+          <p className="text-7xl font-extrabold text-[#54043f]">in a single link.</p>
+
+          <p className="text-2xl text-[#54043f] mt-4 mb-6">Step into a smarter way to share online. Linkverse empowers you to direct your audience from Instagram, TikTok, Twitter, and YouTube to your full collection of content, products, and platforms. Build your universe in minutes, share it everywhere.</p>
+
+        {/* step11: lets put an input tag and a button here below */}
+
+        {/* step12: see next step in "lib" folder there. */}
+        <div className="input flex gap-2">
+          <input className="bg-white text-[#54043f] px-2 py-2 focus:outline-[#54043f] rounded-md" type="text" placeholder="linkverse.vercel.app/url" />
+          <button className="bg-[#54043f] text-white px-4 py-4 rounded-full font-semibold">Claim Your LinkVerse</button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+        </div>
+        <div className="flex flex-col justify-center items-center mr-[10vw]">
+          {/* step9: now lets make the image here below. */}
+          <Image src="/linkverse.png" width={500} height={500} alt="linkverse" />
+
+        </div>
+      </section>
+      <section className="bg-[#a1c0ff] min-h-[100vh]">
+        
+      </section>
+    </main>
   );
 }
