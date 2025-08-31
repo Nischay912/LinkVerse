@@ -1,6 +1,6 @@
 // step44: need to make client component to use use state here below.
 "use client";
-import { useState } from "react";
+import { useState , Suspense} from "react";
 
 // step15: lets define the page to generate the links for the linktree here below.
 import React from "react";
@@ -12,7 +12,7 @@ import { Bounce } from "react-toastify";
 // step90: lets now import useSearchParams here below.
 import { useSearchParams } from "next/navigation";
 
-const Page = () => {
+function GenerateContent() {
 
     // step91: lets use the useSearchParams hook here below ; which does what : const searchParams = useSearchParams();   searchParams.get('foo') // returns 'bar' when ?foo=bar in the URL.
 
@@ -367,6 +367,31 @@ const Page = () => {
       </div>
     </div>
   </>
+  );
+};
+
+// DURING DEPLOYMENT SOME ERROR COMING DUE TO USESEARCH PARAMS , SO WE USE THE FOLLOWING CODE WITH SUSPENSE TO FIX IT.
+/*
+// SUSPENSE EXPLANATION:
+// Why Suspense is used here:
+// 1. useSearchParams() hook requires Suspense boundary in Next.js App Router
+// 2. During server-side rendering, search parameters are async and need to be "suspended"
+// 3. Suspense provides a fallback UI while the search params are being resolved
+// 4. This prevents the "missing suspense boundary" error and makes the component SSR-compatible
+// 5. Once the data loads, React replaces the fallback with your actual component
+//
+// Without Suspense: Error during build/prerendering
+// With Suspense: Works perfectly on both server and client side
+*/
+const Page = () => {
+  return (
+    <Suspense fallback={
+      <div className="bg-[#ffceee] min-h-screen flex items-center justify-center">
+        <div className="text-[#54043f] text-xl">Loading...</div>
+      </div>
+    }>
+      <GenerateContent />
+    </Suspense>
   );
 };
 
