@@ -112,6 +112,18 @@ function GenerateContent() {
         setLinks(links.concat([{link : "" , linktext : ""}]))
     }
 
+    // for removal of links added there
+    const removeLink = (index) => {
+      // Only remove if there's more than 1 link remaining
+      if (links.length > 1) {
+        setLinks(links.filter((_, i) => i !== index));
+      }
+    };
+
+    const hasEmptyLinks = () => {
+      return links.length === 0 || links.some(item => item.link === "" || item.linktext === "");
+    };
+
     // step137: added a function to copy the generated URL to clipboard
     const copyToClipboard = () => {
         navigator.clipboard.writeText(generatedUrl)
@@ -285,6 +297,20 @@ function GenerateContent() {
                 type="text"
                 placeholder="Paste your link here"
               />
+
+              {/* Remove button for each link pair - only show if more than 1 link exists */}
+              {links.length > 1 && (
+                <svg 
+                  onClick={() => removeLink(index)}
+                  className="w-12 h-12 text-black cursor-pointer hover:text-slate-700 transition-colors"
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                  title="Remove this link"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              )}
               
             </div>})}
               {/* step49: now lets make the add link button to call the addLink function here below  on clicking it. */}
