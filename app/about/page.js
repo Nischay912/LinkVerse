@@ -30,7 +30,7 @@ export default function About() {
                 LinkVerse started as a personal project to solve a common problem: as social media platforms multiplied, it became messy to share all my different profiles with others.
               </p>
               <p className="text-gray-700 mb-4">
-                Instead of sending multiple links, I wanted one place where people could find everything about my online presence. That's how LinkVerse was born.
+                Instead of sending multiple links, I wanted one place where people could find everything about my online presence. That&apos;s how LinkVerse was born.
               </p>
               <p className="text-gray-700">
                 What began as a simple tool for myself has now evolved into a platform that others can use to simplify their digital sharing too.
@@ -96,7 +96,7 @@ export default function About() {
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <h3 className="text-lg font-semibold text-[#1a365d] mb-3">Privacy Focused</h3>
               <p className="text-gray-700">
-                I value your privacy and only collect what's necessary to provide the service.
+                I value your privacy and only collect what&apos;s necessary to provide the service.
               </p>
             </div>
           </div>
@@ -109,7 +109,7 @@ export default function About() {
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-[#1a365d] md:text-3xl mb-6">Get In Touch</h2>
             <p className="text-gray-700 mb-8">
-              I'm always interested in hearing feedback, suggestions, or just connecting with fellow developers and users.
+              I&apos;m always interested in hearing feedback, suggestions, or just connecting with fellow developers and users.
             </p>
             
             <div className="flex justify-center space-x-6">
@@ -141,7 +141,7 @@ export default function About() {
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-2xl font-bold text-[#54043f] md:text-3xl mb-6">Ready to create your LinkVerse?</h2>
             <p className="text-md text-[#54043f] mb-8">
-              It's free, simple, and takes just a few minutes to set up.
+              It&apos;s free, simple, and takes just a few minutes to set up.
             </p>
             <div className="flex flex-col items-center gap-4">
         {/* Primary action button */}

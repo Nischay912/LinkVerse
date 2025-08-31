@@ -18,7 +18,7 @@ export default function Contact() {
               Get in Touch
             </h1>
             <p className="text-lg text-gray-700 md:text-xl max-w-2xl mx-auto">
-              Have questions or want to learn more about LinkVerse? We're here to help.
+              Have questions or want to learn more about LinkVerse? We&apos;re here to help.
             </p>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default function Contact() {
                     <div>
                       <h3 className="font-semibold text-[#1a365d] text-lg mb-1">Email us</h3>
                       <p className="text-gray-700">nischaykumar.dev@gmail.com</p>
-                      <p className="text-gray-500 text-sm mt-1">We'll respond within 24 hours</p>
+                      <p className="text-gray-500 text-sm mt-1">We&apos;ll respond within 24 hours</p>
                     </div>
                   </div>
                   
@@ -100,7 +100,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-[#1a365极速赛车开奖直播d] mb-2">No Login Required</h4>
-                      <p className="text-gray-700">Unlike other services, we don't force you to create an account. Just create your page and share your unique LinkVerse URL.</p>
+                      <p className="text-gray-700">Unlike other services, we don&apos;t force you to create an account. Just create your page and share your unique LinkVerse URL.</p>
                     </div>
                   </div>
                   
@@ -124,7 +124,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-[#1a365d] mb-2">Instant Setup</h4>
-                      <p className="text-gray-700">Get your LinkVerse page in seconds. No complicated process, no lengthy forms - just add your links and you're ready to share.</p>
+                      <p className="text-gray-700">Get your LinkVerse page in seconds. No complicated process, no lengthy forms - just add your links and you&apos;re ready to share.</p>
                     </div>
                   </div>
                 </div>

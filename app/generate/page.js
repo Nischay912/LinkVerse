@@ -12,7 +12,7 @@ import { Bounce } from "react-toastify";
 // step90: lets now import useSearchParams here below.
 import { useSearchParams } from "next/navigation";
 
-const page = () => {
+const Page = () => {
 
     // step91: lets use the useSearchParams hook here below ; which does what : const searchParams = useSearchParams();   searchParams.get('foo') // returns 'bar' when ?foo=bar in the URL.
 
@@ -370,4 +370,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
