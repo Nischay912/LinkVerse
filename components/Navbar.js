@@ -1,15 +1,34 @@
+// step122: now we make this client component to use use state here below.
+"use client";
+
 // step1: lets make this navbar here below.
 
 import React from 'react'
 import Link from 'next/link'
 
+// step123: lets now import usePathName hook here below.
+import { usePathname } from 'next/navigation'
+
 const Navbar = () => {
+
+  // step124: now lets use the usePathName hook here below ;usePathname() :This gives you the current route (e.g., /, /generate, /about, etc.) ; Example: if you’re on /generate, then pathname === "/generate".
+  const pathname = usePathname();
+
+  // step125: now we want to hide the navbar in [handle] page there ; so we write the following code below , to include it on "/" and "/genrate" page only ; so the below code checks if the current pathname is in the array mentioned below or not.
+  const showNavbar = ["/" , "/generate"].includes(pathname);
+
   return (
+    <>
 
-    // step3: made it fixed positioned so that even on scrolling it appears on the top there.
+    {/* // step3: made it fixed positioned so that even on scrolling it appears on the top there. */}
 
-    // step4: after making this navbar we now go in page.js of root app directory there.
-    <nav className='bg-[#701c5a] text-white w-[80vw] top-10 right-[10vw] rounded-full p-5 px-7 flex justify-between items-center fixed'>
+    {/* // step4: after making this navbar we now go in page.js of root app directory there. */}
+
+    {/* step126: now we use the showNavbar variable here below ; i.e. if the showNavbar is true then returns this else not ; thus navbar is not shown on the [hanle] page there now. */}
+
+    {/* step127: see the next steps in [handle] page.js file there now. */}
+    {showNavbar &&
+    <nav className='bg-[#701c5a] text-white w-[95vw] md:w-[80vw] top-4 md:top-10 left-1/2 -translate-x-1/2 rounded-full p-3 px-4 sm:px-6 md:p-5 md:px-7 flex justify-between items-center fixed z-50'>
       
       {/* step2: we made this logo to be flexbox so that svg and text "linkverse" can be side by side. */}
       <div className='logo flex items-center gap-2'>
@@ -63,17 +82,19 @@ const Navbar = () => {
             </g>
           </svg>
         </div>
-        <h1 className='text-2xl font-bold'>
+        <h1 className='text-xl sm:text-2xl font-bold'>
           <Link href={"/"}>Linkverse</Link>
         </h1>
       </div>
 
-      <div className='flex items-center space-x-6'>
+      <div className='flex items-center space-x-3 sm:space-x-6 text-sm sm:text-base'>
         <Link href="/" className='hover:text-yellow-300 transition-colors duration-300'>Home</Link>
-        <Link href="/" className='hover:text-yellow-300 transition-colors duration-300'>About</Link>
-        <Link href="/" className='hover:text-yellow-300 transition-colors duration-300'>Contact</Link>
+        <Link href="/about" className='hover:text-yellow-300 transition-colors duration-300'>About</Link>
+        <Link href="/contact" className='hover:text-yellow-300 transition-colors duration-300'>Contact</Link>
       </div>
     </nav>
+    }
+  </>
   )
 }
 

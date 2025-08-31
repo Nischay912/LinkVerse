@@ -38,6 +38,12 @@ const page = () => {
 
     const[pic , setPic] = useState("")
 
+    // step134: also now so create a state to control the input tag value for description there.
+    const[desc , setdesc] = useState("")
+
+    // step136: now lets create a state to store the generated url here below.
+    const[generatedUrl , setGeneratedUrl] = useState("")
+
     // step59: now lets define the setlink function here below.
 
     // step67: now lets make the handleChange function here below which runs every time user types in any of the link related input tags there ; we had index in those there where index meant which pair of input tag is user typing in out of the multiple input tag pairs being created there.
@@ -106,11 +112,17 @@ const page = () => {
         setLinks(links.concat([{link : "" , linktext : ""}]))
     }
 
+    // step137: added a function to copy the generated URL to clipboard
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(generatedUrl)
+        toast.success("Link copied to clipboard!")
+    }
+
     // step37: lets now make a function below to make a POST request to the backend here below.
     // const addLink = async (text , link , handle) =>{
 
     // step60: renamed this to submitLinks here below.
-    const submitLinks = async (text , link , handle) =>{
+    const submitLinks = async () =>{
 
         // step38: we copied the code from POSTMAN > clicking on </> on right sidebar of it and copying "JavaScript-fetch" code from there and pasting inside this here below.
         const myHeaders = new Headers();
@@ -124,8 +136,10 @@ const page = () => {
 
         // step61: we now will send links together and not seperately like we were sending earlier above.
         "links": links,
-        "handler": handle,
-        "pic": pic
+        "handle": handle,
+        "pic": pic,
+        // step135: so now also send the description there.
+        "desc": desc
         });
 
         // step62: can do console log now here below to print the "raw" data in console of server in temrinal of vs code now for debugging.
@@ -158,6 +172,10 @@ const page = () => {
             setLinks([{link : "" , linktext : ""}])
             setPic("")
             setHandle("")
+            setdesc("")
+
+            // step138: lets set the generated url when a tree successfully got created there.
+            setGeneratedUrl(`${process.env.NEXT_PUBLIC_AUTH_URL}/${handle}`)
         }
         else{
             toast.error(result.message)
@@ -186,19 +204,19 @@ const page = () => {
         transition={Bounce}
     />
 
-    <div className="bg-[#ffceee] min-h-screen grid grid-cols-2">
+    <div className="bg-[#ffceee] min-h-screen md:grid md:grid-cols-2 ">
       {/* step20: lets make the content to come at centre here below. */}
-      <div className="col1 flex flex-col justify-center items-center">
+      <div className="col1 flex flex-col justify-center items-center px-4 md:px-0">
         {/* step19: now lets make the content in the 1st column of the grid here below. */}
 
         {/* step21: design the page now below to accept various things via input tags here below. */}
 
         {/* step22: now see next steps in route.js file there now. */}
-        <div className="flex flex-col gap-5 my-8">
-          <h1 className="font-bold text-4xl">Create your LinkVerse</h1>
+        <div className="flex flex-col gap-5 my-8 w-full max-w-lg">
+          <h1 className="font-bold text-3xl md:text-4xl text-center md:text-left mt-10 md:mt-8">Create your LinkVerse</h1>
           <div className="item">
-            <h2 className="font-semibold text-2xl text-slate-700">Choose handle</h2>
-            <div className="mx-4">
+            <h2 className="font-semibold text-xl md:text-2xl text-slate-700">Choose handle</h2>
+            <div className="mx-0 md:mx-4">
               <input
 
             // step46: also lets make the value of the input tag to be equal to whatever is present in the handle state here below.
@@ -206,7 +224,7 @@ const page = () => {
 
             // step45: now lets make this input tag to run the function setHandle ; that takes the current value written inside this input tag as its parameter here below ; and thus updates the handle state with the current value of the input tag.
                 onChange={(e) => {setHandle(e.target.value)}}
-                className="px-4 py-2 mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
+                className="w-full px-4 py-2 mx-0 md:mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
                 type="text"
                 placeholder="Enter Handle"
               />
@@ -214,9 +232,11 @@ const page = () => {
           </div>
 
           <div className="item">
-            <h2 className="font-semibold text-2xl text-slate-700">Enter links to add</h2>
+            <h2 className="font-semibold text-xl md:text-2xl text-slate-700">Enter links to add</h2>
 
             {/* step53: now we want the div below to be keep coming till all the links user wants is not added */}
+
+            {/* links && was written to ensure to add only if links exist there i.e. if "links" is not null there. */}
 
             {/* step54: so we use map function now , which will show the two input boxes for each of the {link , linktext} object present in this array of object "links" ; so that we see as many pair of input boxes , as much we have the link pairs added by the user there ; so now as much objects are there in the state , that much input tag pairs should be shown there.  */}
 
@@ -224,7 +244,7 @@ const page = () => {
 
             {/* step56: item represnts each {link , linktext} object now ; so we make the {linktext} to {item.linktext} in the input tag below and same for {link} to {item.link} now. */}
             {links && links.map((item , index) => {
-            return <div key={index} className="mx-4">
+            return <div key={index} className="mx-0 md:mx-4 flex flex-col md:flex-row gap-2">
                 {/* step47: lets now similarly handle these both input tags too below here. */}
 
             <input
@@ -233,7 +253,7 @@ const page = () => {
 
                 // step58: same way as lat step done here too below.
                 onChange={(e)=>{handleChange(index ,item.link,  e.target.value)}}
-                className="px-4 py-2 mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
+                className="w-full px-4 py-2 mx-0 md:mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
                 type="text"
                 placeholder="Enter link text"
               />
@@ -261,7 +281,7 @@ const page = () => {
                 */
 
             onChange={(e)=>{handleChange(index , e.target.value , item.linktext)}}
-                className="px-4 py-2 mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
+                className="w-full px-4 py-2 mx-0 md:mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
                 type="text"
                 placeholder="Paste your link here"
               />
@@ -271,19 +291,29 @@ const page = () => {
               {/* <button onClick={() => {addLink(linktext , link , handle)}} className="px-5 py-2 mx-2 bg-[#54043f] text-white rounded-full font-bold">Add Link</button> */}
 
               {/* step66: we now no need to pass any arguments inside the addLink function for now as it just creates input fields every time we click on it. */}
-              <button onClick={() => {addLink()}} className="px-5 py-2 mx-2 bg-[#54043f] text-white rounded-full font-bold">+ Add Link</button>
+              <button onClick={() => {addLink()}} className="px-5 py-2 mx-0 md:mx-2 bg-[#54043f] text-white rounded-full font-bold cursor-pointer w-full md:w-auto">+ Add Link</button>
           </div>
 
           <div className="item">
-            <h2 className="font-semibold text-2xl mx-2 my-2 text-slate-700">Add your picture and finalize</h2>
-            <div className="mx-4 flex flex-col">
+            {/* step132: lets give option to add description too along with picture here below. */}
+            <h2 className="font-semibold text-xl md:text-2xl mx-0 md:mx-2 my-2 text-slate-700">Add your picture and description</h2>
+            <div className="mx-0 md:mx-4 flex flex-col">
                 <input
                 // step48: also do same to handle the picture link too here below.
                 value={pic}
                 onChange={(e) => {setPic(e.target.value)}}
-                className="px-4 py-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
+                className="px-4 py-2 mx-0 md:mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
                 type="text"
                 placeholder="Add your picture"
+              />
+
+              {/* step133: so we make a copy of the above input tag here below for description now. */}
+              <input
+                value={desc}
+                onChange={(e) => {setdesc(e.target.value)}}
+                className="px-4 py-2 mx-0 md:mx-2 my-2 bg-white text-[#54043f] focus:outline-[#54043f] rounded-full"
+                type="text"
+                placeholder="Enter your description"
               />
 
               {/* step80: and finally when user press Proceed it runs the submitLinks function , where : the data filled by user is sent to the database using the code written there ; and we hd sone console.log too so we can see in browser there too the data entered in json form by the user there. */}
@@ -293,11 +323,34 @@ const page = () => {
               {/* step88: we can also put up the button to be disabled if any of the input fields are empty. */}
 
               {/* step89: can even put up a toast instead of disabled too ; by using if statement with below conditions to show toast and run the submitLinks function in the else part. */}
-              <button disabled={pic==="" || links.length===0 || handle===""} onClick={()=>{submitLinks()}} 
+              <button disabled={pic==="" || links.length===0 || handle===""|| desc===""} onClick={()=>{submitLinks()}} 
               
             //  step89: also lets show a toast message when user clicks on proceed button if any of the input fields are empty and also lets lighten the color of the button when it is disabled ; and also make cursor disabled shown when hovered , when it is disabled.
 
-              className="px-5 py-2 mx-2 w-fit my-5 bg-[#54043f] text-white rounded-full font-bold disabled:bg-[#a4a4a4] disabled:cursor-not-allowed">Proceed</button>
+              className="px-5 py-2 mx-0 md:mx-2 w-full md:w-fit my-5 bg-[#54043f] text-white rounded-full font-bold disabled:bg-[#a4a4a4] disabled:cursor-not-allowed cursor-pointer">Finalize & Proceed</button>
+
+              {/* step139: lets add a section to show the generated link and the copy button here now ; this will be shown only if the link is generated i.e if the generatedUrl is not null here below. */}
+              {generatedUrl && (
+              <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
+                  <h3 className="font-semibold text-lg text-slate-700 mb-2">Your LinkVerse is live!</h3>
+                  <div className="flex flex-col sm:flex-row items-center">
+                    <input
+                      value={generatedUrl}
+                      readOnly
+                      className="px-4 py-2 w-full sm:flex-grow bg-gray-100 text-[#54043f] rounded-l-full sm:rounded-r-none border border-gray-300"
+                      type="text"
+                    />
+                    <button 
+                      onClick={copyToClipboard}
+                      className="px-4 py-2 w-full sm:w-auto mt-2 sm:mt-0 bg-[#54043f] text-white rounded-r-full border border-l-0 border-[#54043f] hover:bg-[#3a032c] transition-colors"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  <p className="text-sm text-gray-600 mt-2">Share this link with your audience</p>
+                </div>
+              )}
+
             </div>
           </div>
 
@@ -306,7 +359,7 @@ const page = () => {
       </div>
 
       {/* step17: we now make the div take 100vh height and width  */}
-      <div className="col2 w-full h-screen ">
+      <div className="col2 w-full h-screen hidden md:block">
         {/* step16: we always put / when the image is in public folder. */}
 
         {/* step18: also we make the image to take 100% height of container and be object-contain which makes it to fit the container maintaining its aspect ratio. */}

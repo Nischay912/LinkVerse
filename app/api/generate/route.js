@@ -17,7 +17,7 @@ export async function POST(request){
     const body = await request.json()
 
     // step83: lets put a check to ensure that if a particular handle name has been claimed by some other user , then another person cannot create a linkverse with the same handle name.
-    const doc = await collection.findOne({handler : body.handler})
+    const doc = await collection.findOne({handle : body.handle})
 
     // step84: so the database is searched with that handle name ; and if handle exists the function responds with success false and an error message here below.
 
@@ -34,7 +34,7 @@ export async function POST(request){
 
     // step27: sends back a response after recieving the request to indicate success here below.
 
-    // step28: we can now go on postman and send a raw body request for like { "linktext" : "facebook" , "linkurl" : "www.facebook.com" , "handler" : "nischay kumar" } and send request to "localhost:3000/api/generate" and see the response there now.
+    // step28: we can now go on postman and send a raw body request for like { "linktext" : "facebook" , "linkurl" : "www.facebook.com" , "handle" : "nischay kumar" } and send request to "localhost:3000/api/generate" and see the response there now.
 
     // step33: now when we send POST requets on postman it will show the response mentioned below after success send of the request.
 
