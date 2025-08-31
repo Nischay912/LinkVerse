@@ -16,6 +16,16 @@ export async function POST(request){
     // step25: now lets get the body of the  incoming POST request here below.
     const body = await request.json()
 
+    // step83: lets put a check to ensure that if a particular handle name has been claimed by some other user , then another person cannot create a linkverse with the same handle name.
+    const doc = await collection.findOne({handler : body.handler})
+
+    // step84: so the database is searched with that handle name ; and if handle exists the function responds with success false and an error message here below.
+
+    // step85: see next steps in generat folder's page.js file there now.
+    if(doc){
+        return Response.json({success: false , error : true , message : "Handle name already taken" , result : null})
+    }
+
     // step32: lets now insert the body returned from the request here in the database now.
     const result = await collection.insertOne(body)
 
@@ -24,6 +34,14 @@ export async function POST(request){
 
     // step27: sends back a response after recieving the request to indicate success here below.
 
-    // step28: we can now go on postman and send a raw body request for like { "linktext" : "facebook" , "linkurl" : "www.facebook.com" , "action" : "add" , "handler" : "nischay kumar" } and send request to "localhost:3000/api/generate" and see the response there now.
-    return Response.json({success: true , error : false , message : "Added" , result : result})
+    // step28: we can now go on postman and send a raw body request for like { "linktext" : "facebook" , "linkurl" : "www.facebook.com" , "handler" : "nischay kumar" } and send request to "localhost:3000/api/generate" and see the response there now.
+
+    // step33: now when we send POST requets on postman it will show the response mentioned below after success send of the request.
+
+    // step34: it will also create a new database on mongodb compass named "linkverse" then there.
+
+    // step35: now see the generate page.js file there now.
+
+    // step82: updated the message to be responded back which toast also shows below.
+    return Response.json({success: true , error : false , message : "Your LinkVerse has been created🎉" , result : result})
 }
