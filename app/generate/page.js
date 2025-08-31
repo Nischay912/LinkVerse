@@ -143,7 +143,7 @@ function GenerateContent() {
         });
 
         // step62: can do console log now here below to print the "raw" data in console of server in temrinal of vs code now for debugging.
-        console.log(raw)
+        // console.log(raw)
 
         const requestOptions = {
         method: "POST",
@@ -160,7 +160,7 @@ function GenerateContent() {
         // step40: now commented the above line and will write our own code here below.
 
         // step41: now we are fetching the response , which gets stored as string in "r" , so next we also need to convert it into json here below ; ALSO MUST PUT "AWAIT" TO CONVERT TO JSON FILE THERE TOO.
-        const r = await fetch("http://localhost:3000/api/generate" , requestOptions)
+        const r = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL || ''}/api/generate`, requestOptions)
         const result = await r.json()
 
         // step42: lets also show a toast on successfully adding the link here below ; which shows the text we wrote in the response object under the field "message" there in the backend there.
